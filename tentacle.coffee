@@ -35,11 +35,10 @@ class Tentacle extends EventEmitter
   onTentacleConnectionError: (error) =>
     debug 'tentacle connection error'
     @emit 'error', error
-    @cleanup error
 
   onTentacleConnectionClosed: (data) =>
     debug 'client closed the connection'
-    @cleanup()
+    @emit 'close'
 
   parseTentacleMessage: =>
     try

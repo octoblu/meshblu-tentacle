@@ -1,6 +1,6 @@
 'use strict';
 {EventEmitter} = require 'events'
-serialport         = require 'serialport'
+serialport     = require 'serialport'
 through        = require 'through'
 _              = require 'lodash'
 
@@ -20,7 +20,6 @@ class Plugin extends EventEmitter
     @options = {}
     @messageSchema = MESSAGE_SCHEMA
     @optionsSchema = _.clone tentacleOptionsSchema
-    @tentacle = new Tentacle()
 
     _.extend @optionsSchema.properties, OPTIONS_SCHEMA
 
