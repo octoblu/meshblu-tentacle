@@ -1,0 +1,30 @@
+{
+  "name": "tentacle-serial",
+  "repository": "octoblu/tentacle-serial",
+  "version": "1.0.0",
+  "main": "connector.js",
+  "scripts": {
+    "preinstall": "node -e \"try{require('./skip-install.js')}catch(e){}\"",
+    "start": "node command.js",
+    "test": "exit 0"
+  },
+  "dependencies": {
+    "coffee-script": "^1.9.0",
+    "debug": "^2.1.0",
+    "lodash": "^3.10.0",
+    "meshblu": "^1.22.0",
+    "serialport": "^1.7.4",
+    "tentacle-protocol-buffer": "^1.0.7",
+    "tentacle-server": "^1.0.0",
+    "through": "^2.3.8"
+  },
+  "bundledDependencies": [
+    "request",
+    "tar",
+    "fstream"
+  ],
+  "keywords": [
+    "meshblu-connector",
+    "gateblu"
+  ]
+}
