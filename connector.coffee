@@ -22,7 +22,6 @@ class Connector extends EventEmitter
 
   onConfig: (device) =>
     @emit 'config', device
-    debug "got config: \n#{JSON.stringify(config, null, 2)}"
     
     try
       @plugin.onConfig arguments...
@@ -58,6 +57,9 @@ class Connector extends EventEmitter
     @plugin.on 'message', (message) =>
       @emit 'message.send', message
       @conx.message message
+
+    @plugin.on 'close', (error) =>
+      @emitError error
 
   emitError: (error) =>
     @emit 'error', error

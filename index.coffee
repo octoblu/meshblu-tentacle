@@ -1,6 +1,6 @@
 'use strict';
 {EventEmitter} = require 'events'
-{SerialPort}   = require 'serialport'
+serialport         = require 'serialport'
 through        = require 'through'
 _              = require 'lodash'
 
@@ -22,28 +22,59 @@ class Plugin extends EventEmitter
     @optionsSchema = _.clone tentacleOptionsSchema
     @tentacle = new Tentacle()
 
-    _.extend optionsSchema.properties, OPTIONS_SCHEMA
+    _.extend @optionsSchema.properties, OPTIONS_SCHEMA
 
   onMessage: (message) =>
+    return unless @tentacle?
+    @tentacle.onMessage message
 
   onConfig: (device) =>
+    debug "OPTIONS:", device
     @setOptions device.options
+    @startTentacleConnection device.options
+
+
+  startTentacleConnection: (config) =>
     @serial.close() if @serial?
 
-    @serial = new SerialPort options.port, baudrate: 57600
+    @getSerialPort config, (err, @serial) =>
+      @serial.on 'open', =>
+        @tentacle = new Tentacle @serial
 
-    @tentacle = new Tentacle @serial
+        @tentacle.on "message", (message) =>
+          @emit 'message', _.extend devices: '*', message
 
-    @tentacle.on "message", (message) =>
-      @emit 'message', _.extend devices: '*', message
+        @tentacle.on "error", (error) =>
+          @serial.close() if @serial?
+          _.defer @startTentacleConnection(config)
 
-    @tentacle.on "error", (error) =>
-      debug "Tentacle errored"
-      @serial.close() if @serial?
+        @tentacle.on "request-config", => @tentacle.onConfig @options
 
-    @tentacle.start()
-    @tentacle.onConfig config
+        @tentacle.start()
+        @tentacle.onConfig @options
 
+      @serial.on 'close', =>
+        @serial = null
+        debug 'serial port closed'
+        _.defer => @startTentacleConnection(config)
+
+  getSerialPort: (options={}, callback=->) =>
+    return callback(null, new serialport.SerialPort options.port, baudrate: 57600 ) if options.port?
+
+    @findPort (err, port) =>
+      callback(null, new serialport.SerialPort port, baudrate: 57600)
+
+  findPort: (callback=->)=>
+    serialport.list (err, ports) =>
+      portName = null
+      ports.forEach (port) =>
+        portName = port.comName if port.manufacturer.indexOf('Arduino') != -1
+        debug 'port:', port.comName
+        debug 'id: ', port.pnpId
+        debug 'manufacturer:', port.manufacturer
+
+      return _.defer( => @findPort(callback)) unless portName?
+      callback null, portName
 
   setOptions: (options={}) =>
     @options = options

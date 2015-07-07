@@ -29,7 +29,7 @@ class Tentacle extends EventEmitter
 
   onConfig: (config) =>
     tentacleConfig = topic: 'config'
-    _.extend tentacleConfig, _.pick( config.options, 'pins', 'broadcastPins', 'broadcastInterval' )
+    _.extend tentacleConfig, _.pick( config, 'pins', 'broadcastPins', 'broadcastInterval' )
     @messageTentacle tentacleConfig
 
   onTentacleConnectionError: (error) =>
@@ -46,6 +46,7 @@ class Tentacle extends EventEmitter
       while (message = @tentacleTransformer.toJSON())
         debug "I got the message\n#{JSON.stringify(message, null, 2)}"
         return @emit 'authenticate', message.authentication if message.topic == 'authentication'
+        return @emit 'request-config', null if message.topic == 'config' && !message.response
         return @emit 'message', message
 
     catch error
