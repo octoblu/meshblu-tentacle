@@ -45,9 +45,8 @@ class Plugin extends EventEmitter
           @emit 'message', _.extend devices: '*', message
 
         @tentacle.on "error", (error) =>
-          @serial.close() if @serial?
-          _.defer @startTentacleConnection(config)
-
+          debug 'tentacle errored.'
+          @serial.close()
         @tentacle.on "request-config", => @tentacle.onConfig @options
 
         @tentacle.start()
