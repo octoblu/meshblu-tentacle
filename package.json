@@ -1,6 +1,6 @@
 {
-  "name": "tentacle-serial",
-  "repository": "octoblu/tentacle-serial",
+  "name": "meshblu-tentacle",
+  "repository": "octoblu/meshblu-tentacle",
   "version": "1.0.0",
   "main": "connector.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "lodash": "^3.10.0",
     "meshblu": "^1.22.0",
     "serialport": "^1.7.4",
-    "tentacle-protocol-buffer": "^1.0.7",
+    "tentacle-protocol-buffer": "^1.0.8",
     "tentacle-server": "^1.0.0",
     "through": "^2.3.8"
   },
