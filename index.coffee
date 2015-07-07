@@ -67,7 +67,8 @@ class Plugin extends EventEmitter
     serialport.list (err, ports) =>
       portName = null
       ports.forEach (port) =>
-        portName = port.comName if port.manufacturer.indexOf('Arduino') != -1
+        manufacturer = port.manufacturer.toLowerCase()
+        portName = port.comName if manufacturer.indexOf('arduino') != -1
         debug 'port:', port.comName
         debug 'id: ', port.pnpId
         debug 'manufacturer:', port.manufacturer
