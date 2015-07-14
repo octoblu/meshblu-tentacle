@@ -1,7 +1,7 @@
 {
   "name": "meshblu-tentacle",
   "repository": "octoblu/meshblu-tentacle",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "tentacle.js",
   "scripts": {
     "preinstall": "node -e \"try{require('./skip-install.js')}catch(e){}\"",

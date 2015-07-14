@@ -46,6 +46,7 @@ class Tentacle extends EventEmitter
         debug "I got the message\n#{JSON.stringify(message, null, 2)}"
         return @emit 'authenticate', message.authentication if message.topic == 'authentication'
         return @emit 'request-config', null if message.topic == 'config' && !message.response
+        return @emit 'ping', null if message.topic == 'ping' && !message.response
         return @emit 'message', message
 
     catch error
