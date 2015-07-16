@@ -59,7 +59,7 @@ class Tentacle extends EventEmitter
       @tentacleConn.write @tentacleTransformer.toProtocolBuffer(msg)
 
     catch error
-      debug "error sending message to Tentacle: #{JSON.stringify(msg, null, 2)}"
+      debug "error sending message to Tentacle: #{JSON.stringify(error, null, 2)}"
       @emit 'error', error
 
 module.exports = Tentacle
