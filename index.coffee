@@ -46,6 +46,7 @@ class Plugin extends EventEmitter
         @tentacle.on "error", (error) =>
           debug 'tentacle errored.'
           @serial.close()
+
         @tentacle.on "request-config", => @tentacle.onConfig @options
 
         @tentacle.start()

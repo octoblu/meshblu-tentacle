@@ -11,8 +11,8 @@ class Tentacle extends EventEmitter
 
   start: =>
     debug 'start called'
-    @tentacleConn.on 'error', @onTentacleConnectionError
-    @tentacleConn.on 'end', @onTentacleConnectionClosed
+    @tentacleConn.on 'error', @onTentacleConnectionError    
+    @tentacleConn.on 'close', @onTentacleConnectionClosed
     @tentacleConn.pipe through(@onTentacleData)
 
   onTentacleData: (data) =>
