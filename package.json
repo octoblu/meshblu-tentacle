@@ -1,7 +1,7 @@
 {
   "name": "meshblu-tentacle",
   "repository": "octoblu/meshblu-tentacle",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "main": "tentacle.js",
   "scripts": {
     "preinstall": "node -e \"try{require('./skip-install.js')}catch(e){}\"",
@@ -11,11 +11,11 @@
   "dependencies": {
     "coffee-script": "^1.9.0",
     "debug": "^2.1.0",
-    "lodash": "^3.10.0",
-    "meshblu": "^1.22.0",
+    "lodash": "^3.10.1",
+    "meshblu": "^1.30.1",
     "serialport": "^1.7.4",
-    "tentacle-protocol-buffer": "^1.0.8",
-    "tentacle-server": "^1.0.0",
+    "tentacle-protocol-buffer": "^1.1.5",
+    "tentacle-server": "^1.0.1",
     "through": "^2.3.8"
   },
   "bundledDependencies": [
@@ -23,6 +23,22 @@
     "tar",
     "fstream"
   ],
+  "platformDependencies": {
+    "darwin": [
+      "xcode"
+    ],
+    "win32": [
+      "Python 2.7",
+      "Visual Studio (Express)"
+    ],
+    "win64": [
+      "Python 2.7",
+      "Visual Studio (Express)"
+    ],
+    "linux": [],
+    "android": null,
+    "ios": null
+  },
   "keywords": [
     "meshblu-connector",
     "gateblu"
