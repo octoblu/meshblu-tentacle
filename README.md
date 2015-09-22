@@ -1,5 +1,11 @@
 ## meshblu-tentacle
 
+[![Build Status](https://travis-ci.org/octoblu/meshblu-tentacle.svg?branch=master)](https://travis-ci.org/octoblu/meshblu-tentacle)
+[![Code Climate](https://codeclimate.com/github/octoblu/meshblu-tentacle/badges/gpa.svg)](https://codeclimate.com/github/octoblu/meshblu-tentacle)
+[![Test Coverage](https://codeclimate.com/github/octoblu/meshblu-tentacle/badges/coverage.svg)](https://codeclimate.com/github/octoblu/meshblu-tentacle)
+[![npm version](https://badge.fury.io/js/meshblu-tentacle.svg)](http://badge.fury.io/js/meshblu-tentacle)
+[![Gitter](https://badges.gitter.im/octoblu/help.svg)](https://gitter.im/octoblu/help)
+
 A Meshblu connector for use in Octoblu or with other services.
 
 ### Setup Instructions
